@@ -1,10 +1,12 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -60,9 +62,21 @@ public class CrimeFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_delete_crime:
-                Crime crime = mCrime;
-                CrimeLab.get(getActivity()).deleteCrime(crime);
-                getActivity().finish();
+                new AlertDialog.Builder(getActivity())
+                        .setIcon(R.drawable.ic_delete_crime_question)
+                        .setTitle("Delete Crime?")
+                        .setMessage("Are you sure you want to delete this crime?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                                getActivity().finish();
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
