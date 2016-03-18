@@ -25,4 +25,5 @@
     <string name="crime_report_subject">CriminalIntent Crime Report</string>
     <string name="send_report">Send crime report via</string>
     <string name="add_crime_button">Add Crime</string>
+    <string name="suspect_call">Call Suspect</string>
 </resources>

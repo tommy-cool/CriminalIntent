@@ -35,6 +35,7 @@ public class CrimeFragment extends Fragment {
 
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_CONTACT = 1;
+    private static final int REQUEST_CALL = 2;
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -42,6 +43,7 @@ public class CrimeFragment extends Fragment {
     private CheckBox mSolvedCheckBox;
     private Button mReportButton;
     private Button mSuspectButton;
+    private Button mCallButton;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -150,6 +152,15 @@ public class CrimeFragment extends Fragment {
                         .setText(getCrimeReport())
                         .setSubject(getString(R.string.crime_report_subject))
                         .startChooser();
+            }
+        });
+
+        final Intent callContact = new Intent(Intent.ACTION_DIAL, ContactsContract.Contacts.CONTENT_URI);
+
+        mCallButton = (Button) v.findViewById(R.id.suspect_call);
+        mCallButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivityForResult(callContact, REQUEST_CALL);
             }
         });
 

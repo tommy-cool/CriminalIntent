@@ -38,7 +38,7 @@ public class CrimeLab {
     }
 
     public void deleteCrime(Crime c) {
-        mDatabase.delete(CrimeTable.NAME, null, null);
+        mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.TITLE + "= '" + c.getTitle() + "'", null);
     }
 
     public List<Crime> getCrimes() {
